@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wedding of Nama Wanita & Nama Pria</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== BACKGROUND MUSIC ===== -->
+<audio id="bg-music" loop>
+  <source src="images/Close To You - Reality Club.mp3" type="audio/mpeg">
+  Your browser doesn't support audio.
+</audio>
+
+<!-- ===== MUSIC TOGGLE BUTTON ===== -->
+<button id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 100; background: var(--rose-mid); border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: none; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.3s;">
+  🎵
+</button>
+
+<!-- ===== COVER ===== -->
+<div id="cover">
+  <div class="floral-top">✿  ❀  ✿</div>
+  <p class="sub">Wedding Invitation</p>
+  <h1 class="title serif">awbnaa<br>&amp;<br>Park Chirae</h1>
+  <div class="cover-greeting">
+    <p class="kepada">Kepada Yth,</p>
+    <p class="nama-tamu" id="nama-tamu">Tamu Undangan</p>
+  </div>
+  <button class="btn-open" onclick="bukaUndangan()">✉&nbsp; Buka Undangan</button>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div id="main">
+
+  <section id="hero" class="hero" style="background-image: url('images/floral-background.png');">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="wedding-of">The Wedding of</p>
+      <div class="divider-small-hero"></div>
+      <h1 class="bride">awbnaa</h1>
+      <p class="and-sign">&amp;</p>
+      <h1 class="groom">Park Chirae</h1>
+      <p class="date">DD . MM . YY</p>
+      <div class="divider"></div>
+      <p class="location-text">Bontang, Kalimantan Timur</p>
+    </div>
+  </section>
+
+  <section id="ayat">
+    <span class="ornament">✿</span>
+    <p class="section-label">We Found Love</p>
+    <div class="divider"></div>
+    <blockquote>
+      "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."
+      <cite>(QS. Ar-Rum : 21)</cite>
+    </blockquote>
+  </section>
+
+  <!-- ===== CONTAINER SCROLL WRAPPER ===== -->
+  <div id="couple-scroll-container" class="couple-scroll-container">
+    <div class="couple-scroll-inner">
+
+      <!-- TITLE COMPONENT (scrolls up as you scroll) -->
+      <div class="couple-scroll-header" id="couple-scroll-header">
+        <p class="section-label" style="color:var(--pink)">We Are Getting Married</p>
+        <h2 class="serif section-title" style="color:var(--rose-deep)">Mempelai</h2>
+        <div class="divider"></div>
+        <p style="font-size:0.82rem;color:var(--text-mid);letter-spacing:1px;">Dengan penuh syukur dan kebahagiaan, kami mengundang kehadiran Anda</p>
+      </div>
+
+      <!-- CARD (3D perspective scroll) -->
+      <div class="couple-scroll-card" id="couple-scroll-card">
+        <div class="couple-scroll-card-inner">
+
+          <section id="couple">
+            <div class="couple-grid">
+              <div class="person-card">
+                <div class="person-photo-placeholder">&#9825;</div>
+                <h3 class="person-name">Nama Wanita</h3>
+                <p class="person-fullname">Nama Lengkap, S.Pd.</p>
+                <p class="person-parents">Putri ke-1 dari<br>Bpk. Nama Ayah &amp; Ibu. Nama Ibu</p>
+                <a href="#" class="person-ig">@instagram_wanita</a>
+              </div>
+              <div class="ampersand-divider">&amp;</div>
+              <div class="person-card">
+                <div class="person-photo-placeholder">&#9825;</div>
+                <h3 class="person-name">Nama Pria</h3>
+                <p class="person-fullname">Nama Lengkap, S.T.</p>
+                <p class="person-parents">Putra ke-1 dari<br>Bpk. Nama Ayah &amp; Ibu. Nama Ibu</p>
+                <a href="#" class="person-ig">@instagram_pria</a>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+      <!-- end card -->
+
+    </div>
+  </div>
+  <!-- ===== END CONTAINER SCROLL ===== -->
+
+  <section id="countdown">
+    <p class="section-label">Save The Date</p>
+    <h2>Menuju Hari Bahagia</h2>
+    <div class="timer">
+      <div class="timer-box"><span class="timer-num" id="t-hari">00</span><span class="timer-label">Hari</span></div>
+      <div class="timer-box"><span class="timer-num" id="t-jam">00</span><span class="timer-label">Jam</span></div>
+      <div class="timer-box"><span class="timer-num" id="t-menit">00</span><span class="timer-label">Menit</span></div>
+      <div class="timer-box"><span class="timer-num" id="t-detik">00</span><span class="timer-label">Detik</span></div>
+    </div>
+    <a class="btn-calendar" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Nama+Wanita+%26+Nama+Pria&dates=20251225T010000Z%2F20251225T100000Z" target="_blank">✎&nbsp; Simpan ke Kalender</a>
+  </section>
+
+  <section id="acara">
+    <p class="section-label">Dengan Rahmat Allah SWT</p>
+    <h2 class="serif section-title">Detail Acara</h2>
+    <div class="divider"></div>
+    <p class="section-description">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami.</p>
+    <div class="acara-grid">
+      <div class="acara-card">
+        <div class="icon-divider">✿</div>
+        <h3 class="acara-type">Akad Nikah</h3>
+        <div class="divider divider-small"></div>
+        <p class="acara-day">Sabtu</p>
+        <p class="acara-date">14 April 2026</p>
+        <p class="acara-time">08.00 – 10.00 WITA</p>
+        <p class="acara-loc">Jl. Nama Jalan No.123,<br>Kelurahan, Kota</p>
+        <a href="https://maps.google.com" target="_blank" class="btn-maps">Google Maps</a>
+      </div>
+      <div class="acara-card">
+        <div class="icon-divider">&#9825;</div>
+        <h3 class="acara-type">Resepsi</h3>
+        <div class="divider divider-small"></div>
+        <p class="acara-day">Sabtu</p>
+        <p class="acara-date">14 April 2026</p>
+        <p class="acara-time">11.00 WITA – Selesai</p>
+        <p class="acara-loc">Nama Gedung,<br>Jl. Nama Jalan, Kota</p>
+        <a href="https://maps.google.com" target="_blank" class="btn-maps">Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <p class="section-label">Our Gallery</p>
+    <h2 class="serif section-title">Momen Bersama</h2>
+    <div class="divider"></div>
+    <div class="gallery-grid">
+      <div class="gallery-item gallery-item-1">&#9825;</div>
+      <div class="gallery-item gallery-item-2">&#10047;</div>
+      <div class="gallery-item gallery-item-3">&#9825;</div>
+      <div class="gallery-item gallery-item-4">&#10047;</div>
+      <div class="gallery-item gallery-item-5">&#9825;</div>
+      <div class="gallery-item gallery-item-6">&#10047;</div>
+      <div class="gallery-item gallery-item-7">&#9825;</div>
+      <div class="gallery-item gallery-item-8">&#10047;</div>
+    </div>
+
+  </section>
+
+  <section id="story">
+    <p class="section-label">Love Story</p>
+    <h2 class="serif section-title">Perjalanan Cinta</h2>
+    <div class="divider"></div>
+    <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
+      <li>
+        <div class="timeline-middle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="timeline-start mb-10 md:text-end">
+          <time class="font-mono italic">Tahun Pertama</time>
+          <div class="text-lg font-black">Pertemuan Pertama</div>
+          <p>Kami pertama kali bertemu di suatu tempat yang penuh kenangan. Pertemuan singkat itu menjadi awal dari sebuah cerita yang indah.</p>
+        </div>
+        <hr />
+      </li>
+      <li>
+        <hr />
+        <div class="timeline-middle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="timeline-end md:mb-10">
+          <time class="font-mono italic">Tahun Kedua</time>
+          <div class="text-lg font-black">Semakin Dekat</div>
+          <p>Seiring waktu, kami semakin mengenal satu sama lain dan banyak momen berharga yang kami lalui bersama.</p>
+        </div>
+        <hr />
+      </li>
+      <li>
+        <hr />
+        <div class="timeline-middle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="timeline-start mb-10 md:text-end">
+          <time class="font-mono italic">Tahun Ketiga</time>
+          <div class="text-lg font-black">Lamaran</div>
+          <p>Momen yang tidak terduga namun paling dinantikan. Dengan penuh keberanian dan cinta, ia menyatakan niatnya untuk bersama selamanya.</p>
+        </div>
+        <hr />
+      </li>
+      <li>
+        <hr />
+        <div class="timeline-middle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="timeline-end md:mb-10">
+          <time class="font-mono italic">Sekarang</time>
+          <div class="text-lg font-black">Menuju Pernikahan</div>
+          <p>Semua perjalanan ini membawa kami ke momen paling berharga: membangun keluarga kecil kami dengan ridho Allah SWT.</p>
+        </div>
+        <hr />
+      </li>
+      <li>
+        <hr />
+        <div class="timeline-middle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="timeline-start mb-10 md:text-end">
+          <time class="font-mono italic">Hari Ini</time>
+          <div class="text-lg font-black">Bersama Selamanya</div>
+          <p>Dengan pelayaran cinta yang telah dilewati, kini kami siap memulai babak baru dalam hidup kami sebagai suami istri.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="gift">
+    <p class="section-label">Love Gift</p>
+    <h2 class="serif section-title">Hadiah Kasih</h2>
+    <div class="divider"></div>
+    <p class="section-description section-desc-m2">Doa restu Anda adalah karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.</p>
+    <div class="gift-cards">
+      <div class="gift-card">
+        <p class="bank-name">Bank BCA</p>
+        <p class="bank-acc" id="acc1">1234567890</p>
+        <p class="bank-holder">a.n. Nama Wanita</p>
+        <button class="btn-copy" onclick="salinRek('acc1',this)">Salin Nomor</button>
+      </div>
+      <div class="gift-card">
+        <p class="bank-name">Bank Mandiri</p>
+        <p class="bank-acc" id="acc2">0987654321</p>
+        <p class="bank-holder">a.n. Nama Pria</p>
+        <button class="btn-copy" onclick="salinRek('acc2',this)">Salin Nomor</button>
+      </div>
+    </div>
+    <div class="gift-box-container">
+      <p class="gift-box-heading">Kirim Kado Fisik</p>
+      <p id="alamat-gift" class="gift-address">Jl. Nama Jalan, RT.00/RW.00, Kelurahan, Kecamatan, Kota, Kalimantan Timur</p>
+      <button class="btn-copy gift-box-btn" onclick="salinAlamat()">Salin Alamat</button>
+    </div>
+  </section>
+
+  <section id="rsvp">
+    <p class="section-label">RSVP &amp; Wishes</p>
+    <h2 class="serif section-title">Ucapan &amp; Kehadiran</h2>
+    <div class="divider"></div>
+    <div class="rsvp-form">
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" id="wish-name" placeholder="Masukkan nama Anda">
+      </div>
+      <div class="form-group">
+        <label>Ucapan &amp; Doa</label>
+        <textarea id="wish-msg" placeholder="Tuliskan ucapan dan doa terbaik Anda..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="kirimUcapan()">Kirim Ucapan ✿</button>
+    </div>
+    <div class="wishes-list" id="wishes-list">
+      <div class="wish-item">
+        <span class="wish-name">Nama Tamu Contoh</span>
+        <p class="wish-text">Semoga pernikahan kalian diberkahi Allah SWT dan menjadi keluarga yang sakinah, mawaddah, warahmah. Aamiin.</p>
+      </div>
+      <div class="wish-item">
+        <span class="wish-name">Tamu Undangan 2</span>
+        <p class="wish-text">Selamat menempuh hidup baru! Semoga selalu harmonis dan bahagia selamanya.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="ornament footer-ornament">✿  ❀  ✿</span>
+    <p class="footer-label">The Wedding of</p>
+    <p class="footer-names">Nama Wanita &amp; Nama Pria</p>
+    <p class="footer-date">Sabtu, 14 April 2026</p>
+    <div class="footer-divider"></div>
+    <p class="footer-closing">Suatu kebahagiaan dan kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.</p>
+    <p class="footer-sign">Kami Yang Berbahagia,</p>
+    <p class="footer-signature">Nama Wanita &amp; Nama Pria</p>
+    <p class="footer-brand">Made with ♡ — Wedding Invitation</p>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

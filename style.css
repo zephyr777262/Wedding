@@ -1,0 +1,338 @@
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+--pink:#D4537E;--rose:#FBEAF0;--rose-mid:#F4C0D1;
+--rose-dark:#993556;--rose-deep:#72243E;
+--gold:#c9a96e;--cream:#fff9f5;
+--text-dark:#3a2030;--text-mid:#7a4a5e;
+}
+body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden}
+
+/* ===== TEXT ANIMATIONS ===== */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes sectionScroll{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.text-animate{animation:fadeInUp 0.6s ease-out forwards;opacity:0}
+section{opacity:0}section.scroll-animate{animation:sectionScroll 0.8s ease-out forwards}
+
+/* ===== COVER ===== */
+#cover{
+position:fixed;inset:0;z-index:999;
+background:linear-gradient(160deg,#fbeaf0 0%,#f4c0d1 50%,#d4537e22 100%);
+display:flex;flex-direction:column;align-items:center;justify-content:center;
+text-align:center;padding:2rem;
+transition:opacity 0.6s ease;
+}
+#cover.hiding{opacity:0;pointer-events:none}
+#cover .floral-top{font-size:1.8rem;letter-spacing:8px;color:var(--rose-dark);opacity:0.45;margin-bottom:1rem}
+#cover .sub{font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.4rem}
+#cover .title{font-family:'Playfair Display',serif;font-size:2.6rem;color:var(--rose-deep);line-height:1.2}
+#cover .kepada{margin-top:2rem;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid)}
+#cover .nama-tamu{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--rose-dark);margin-top:0.3rem}
+#cover .btn-open{
+margin-top:2.5rem;padding:0.9rem 2.5rem;
+border:1.5px solid var(--pink);background:transparent;
+color:var(--rose-dark);font-family:'Lato',sans-serif;
+font-size:0.82rem;letter-spacing:3px;text-transform:uppercase;
+cursor:pointer;border-radius:50px;transition:all 0.3s;
+}
+#cover .btn-open:hover{background:var(--pink);color:#fff}
+
+
+/* ===== MAIN CONTENT ===== */
+#main{display:none}
+#main.show{display:block}
+section{padding:5rem 1.5rem;text-align:center}
+.ornament{font-size:1.8rem;letter-spacing:6px;color:var(--rose-mid);display:block;margin:0.5rem auto}
+.section-label{font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--pink);margin-bottom:0.5rem}
+.serif{font-family:'Playfair Display',serif}
+.divider{width:80px;height:1px;background:var(--rose-mid);margin:1.5rem auto}
+
+/* ===== MUSIC TOGGLE BUTTON ===== */
+#music-toggle{line-height:1}
+#music-toggle.music-off{opacity:0.5;filter:grayscale(100%)}
+
+
+/* ===== HERO ===== */
+#hero{
+  min-height:100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+#hero::before{
+  content:'❀  ✿  ❀  ✿  ❀';position:absolute;top:2rem;
+  font-size:0.9rem;letter-spacing:8px;color:var(--rose-mid);opacity:0.6;
+}
+.hero-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:linear-gradient(180deg,rgba(251,234,240,0.5) 0%,rgba(255,249,245,0.5) 100%);
+  z-index:1;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+#hero .wedding-of{font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--text-mid)}
+#hero .bride{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,8vw,4.5rem);color:var(--rose-deep);line-height:1}
+#hero .and-sign{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);margin:0.3rem 0}
+#hero .groom{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,8vw,4.5rem);color:var(--rose-deep);line-height:1}
+#hero .date{margin-top:1.5rem;font-size:1.1rem;letter-spacing:6px;color:var(--text-mid)}
+
+
+/* ===== AYAT ===== */
+#ayat{background:var(--rose)}
+#ayat blockquote{max-width:580px;margin:0 auto;font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;line-height:1.9;color:var(--text-mid)}
+#ayat cite{display:block;margin-top:1rem;font-style:normal;font-size:0.78rem;letter-spacing:2px;color:var(--pink)}
+
+
+/* ===================================================================
+   CONTAINER SCROLL — replika Aceternity UI ContainerScroll
+   =================================================================== */
+
+/*
+  Prinsip kerja:
+  - .couple-scroll-container  → wrapper tinggi besar (sticky viewport)
+  - .couple-scroll-inner      → sticky di dalam, perspective 3D
+  - .couple-scroll-header     → judul yang bergerak ke atas (translateY)
+  - .couple-scroll-card       → kartu yang berputar dari rotateX(20deg) → 0
+  - .couple-scroll-card-inner → konten (section #couple) di dalam kartu
+*/
+
+.couple-scroll-container{
+  /* Tinggi total scrollable area — lebih tinggi = animasi lebih lambat */
+  height: 180vh;
+  position: relative;
+  background: var(--cream);
+}
+
+.couple-scroll-inner{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+  /* Perspective untuk efek 3D */
+  perspective: 1000px;
+}
+
+/* Header / title component */
+.couple-scroll-header{
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  /* Akan dianimasikan via JS: translateY */
+  will-change: transform;
+  transition: transform 0.05s linear;
+  margin-bottom: 4rem;
+  z-index: 2;
+}
+
+/* Card 3D */
+.couple-scroll-card{
+  max-width: 350px;
+  width: 100%;
+  /* margin-top negatif biar overlap dgn header sedikit, sesuai aslinya */
+  margin-top: -3rem;
+  /* Akan dianimasikan via JS: rotateX + scale */
+  will-change: transform;
+  transition: transform 0.05s linear;
+  transform-origin: top center;
+  border-radius: 30px;
+  border: 4px solid var(--rose-mid);
+  background: #fff;
+  box-shadow:
+    0 0 #0000004d,
+    0 20px 20px #0000004a,
+    0 20px 37px #00000042,
+    0 20px 50px #00000026,
+    0 20px 60px #0000000a;
+  overflow: hidden;
+  /* Tinggi kartu */
+  height: auto;
+  min-height: 500px;
+}
+
+.couple-scroll-card-inner{
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background: var(--rose);
+  border-radius: 22px;
+  padding: 1rem;
+}
+
+/* Sembunyikan padding section asli karena sudah ada di card-inner */
+#couple{
+  padding: 2.5rem 1rem;
+  background: transparent;
+}
+
+
+/* ===== COUPLE (isi asli, tidak berubah) ===== */
+.couple-grid{display:flex;flex-direction:column;gap:2rem;justify-content:center;align-items:center;margin-top:1rem}
+.person-card{max-width:280px;text-align:center;width:100%}
+.person-photo-placeholder{
+width:160px;height:210px;
+border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+margin:0 auto 1rem;border:4px solid var(--rose-mid);
+background:var(--rose);display:flex;align-items:center;justify-content:center;
+font-size:4rem;color:var(--rose-mid);
+}
+.person-name{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--rose-deep)}
+.person-fullname{font-size:0.88rem;color:var(--pink);margin:0.2rem 0}
+.person-parents{font-size:0.82rem;color:var(--text-mid);line-height:1.7;margin-top:0.5rem}
+.person-ig{display:inline-block;margin-top:0.8rem;font-size:0.78rem;color:var(--pink);text-decoration:none;border:1px solid var(--rose-mid);padding:0.3rem 1rem;border-radius:50px}
+.ampersand-divider{display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:3.5rem;color:var(--rose-mid);padding-top:1rem;width:100%}
+
+
+/* ===== COUNTDOWN ===== */
+#countdown{background:linear-gradient(180deg,var(--cream) 0%,var(--rose-mid) 100%);color:var(--pink);}
+#countdown .section-label{color:var(--pink)}
+#countdown h2{font-family:'Playfair Display',serif;font-size:2rem;color:var(--pink);margin-bottom:2rem}
+.timer{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:2rem 0;}
+.timer-box{background:rgba(255,255,255,0.15);border:1.5px solid var(--pink);border-radius:12px;padding:1rem 1.5rem;min-width:80px}
+.timer-num{font-size:2.5rem;font-weight:700;display:block}
+.timer-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;opacity:0.8}
+.btn-calendar{display:inline-block;margin-top:1rem;padding:0.8rem 2rem;border:1.5px solid var(--pink);color:var(--pink);text-decoration:none;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;border-radius:50px;transition:all 0.3s}
+.btn-calendar:hover{background:rgba(255,255,255,0.2)}
+
+
+/* ===== ACARA ===== */
+#acara{background:var(--cream)}
+.acara-grid{display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-top:2rem}
+.acara-card{background:#fff;border:1px solid var(--rose-mid);border-radius:20px;padding:2rem 2.5rem;max-width:300px;text-align:center}
+.acara-type{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--rose-deep)}
+.acara-day{font-size:0.78rem;letter-spacing:3px;text-transform:uppercase;color:var(--pink);margin:0.5rem 0}
+.acara-date{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--text-dark)}
+.acara-time{font-size:0.88rem;color:var(--text-mid);margin:0.3rem 0}
+.acara-loc{font-size:0.83rem;color:var(--text-mid);line-height:1.6;margin:0.8rem 0}
+.btn-maps{display:inline-block;padding:0.6rem 1.5rem;background:var(--pink);color:#fff;text-decoration:none;font-size:0.76rem;letter-spacing:2px;text-transform:uppercase;border-radius:50px;margin-top:0.5rem;transition:opacity 0.3s}
+.btn-maps:hover{opacity:0.85}
+
+
+/* ===== GALLERY ===== */
+#gallery{background:var(--rose)}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:600px;margin:2rem auto 0}
+.gallery-item{aspect-ratio:1;background:var(--rose-mid);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:rgba(255,255,255,0.6);overflow:hidden}
+.gallery-item:first-child{grid-row:span 2;aspect-ratio:unset}
+
+
+/* ===== LOVE STORY ===== */
+#story{background:var(--cream)}
+.timeline-vertical{max-width:900px;margin:2rem auto 0;list-style:none;padding:0 2rem;position:relative}
+.timeline-vertical::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--rose-mid);transform:translateX(-50%)}
+.timeline-vertical>li{display:flex;margin-bottom:3rem;position:relative}
+.timeline-vertical>li:nth-child(odd){justify-content:flex-start}
+.timeline-vertical>li:nth-child(even){justify-content:flex-end}
+.timeline-vertical>li:nth-child(odd) .timeline-middle{order:2}
+.timeline-vertical>li:nth-child(odd) .timeline-start{order:1}
+.timeline-vertical>li:nth-child(even) .timeline-middle{order:1}
+.timeline-vertical>li:nth-child(even) .timeline-end{order:2}
+.timeline-vertical>li>hr{display:none}
+.timeline-middle{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:50px;height:50px;position:relative;z-index:10}
+.timeline-middle svg{width:24px;height:24px;color:#fff;background:var(--pink);border-radius:50%;padding:4px;box-shadow:0 0 0 2px var(--cream)}
+.timeline-start,.timeline-end{flex:0 0 calc(50% - 30px);padding:1.5rem}
+.timeline-start{text-align:right;padding-right:2rem}
+.timeline-end{text-align:left;padding-left:2rem}
+.timeline-start time,.timeline-end time{font-size:0.72rem;color:var(--pink);font-weight:500;letter-spacing:1px;display:block}
+.timeline-start .text-lg,.timeline-end .text-lg{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--rose-deep);margin:0.5rem 0;font-weight:700}
+.timeline-start p,.timeline-end p{font-size:0.86rem;color:var(--text-mid);line-height:1.7;margin-top:0.3rem}
+@media(max-width:768px){
+  .timeline-vertical{padding:2rem 1rem}
+  .timeline-vertical::before{left:30px}
+  .timeline-vertical>li{justify-content:flex-start!important;flex-direction:column}
+  .timeline-vertical>li .timeline-middle{order:2!important;margin-left:-45px}
+  .timeline-vertical>li .timeline-start,.timeline-vertical>li .timeline-end{order:3!important;text-align:left!important;flex:1;padding-left:80px;padding-right:0}
+  .timeline-vertical>li:nth-child(odd) .timeline-start{padding-top:0}
+}
+
+
+/* ===== GIFT ===== */
+#gift{background:var(--rose)}
+.gift-cards{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center}
+.gift-card{background:#fff;border:1px solid var(--rose-mid);border-radius:16px;padding:1.5rem 2rem;min-width:240px;text-align:center}
+.bank-name{font-weight:700;font-size:1rem;color:var(--rose-deep);margin-bottom:0.3rem}
+.bank-acc{font-size:1.4rem;font-weight:700;letter-spacing:2px;color:var(--text-dark);margin:0.5rem 0}
+.bank-holder{font-size:0.78rem;color:var(--text-mid)}
+.btn-copy{margin-top:1rem;padding:0.5rem 1.5rem;border:1px solid var(--pink);background:transparent;color:var(--pink);font-size:0.76rem;letter-spacing:2px;text-transform:uppercase;border-radius:50px;cursor:pointer;transition:all 0.3s}
+.btn-copy:hover,.btn-copy.copied{background:var(--pink);color:#fff}
+
+
+/* ===== RSVP ===== */
+#rsvp{background:var(--cream)}
+.rsvp-form{max-width:460px;margin:2rem auto 0;text-align:left}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.4rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:0.75rem 1rem;border:1px solid var(--rose-mid);border-radius:10px;font-family:'Lato',sans-serif;font-size:0.9rem;background:#fff;color:var(--text-dark);outline:none;transition:border 0.3s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--pink)}
+.form-group textarea{resize:none;height:100px}
+.radio-group{display:flex;gap:0.8rem;flex-wrap:wrap}
+.radio-label{display:flex;align-items:center;gap:0.5rem;font-size:0.84rem;color:var(--text-mid);cursor:pointer;padding:0.5rem 1rem;border:1px solid var(--rose-mid);border-radius:50px;transition:all 0.3s}
+.radio-label input{width:auto}
+.radio-label:has(input:checked){background:var(--pink);color:#fff;border-color:var(--pink)}
+.btn-submit{width:100%;padding:1rem;margin-top:0.5rem;background:var(--pink);color:#fff;border:none;font-family:'Lato',sans-serif;font-size:0.82rem;letter-spacing:3px;text-transform:uppercase;border-radius:50px;cursor:pointer;transition:opacity 0.3s}
+.btn-submit:hover{opacity:0.85}
+.wishes-list{max-width:460px;margin:2rem auto 0}
+.wish-item{background:#fff;border-radius:12px;padding:1rem 1.2rem;margin-bottom:1rem;text-align:left;border:1px solid var(--rose-mid)}
+.wish-name{font-weight:700;font-size:0.88rem;color:var(--rose-deep)}
+.wish-status{font-size:0.73rem;color:var(--pink);margin-left:0.5rem}
+.wish-text{font-size:0.84rem;color:var(--text-mid);margin-top:0.3rem;line-height:1.6}
+
+
+/* ===== FOOTER ===== */
+footer{background:var(--rose-deep);color:rgba(255,255,255,0.8);text-align:center;padding:3rem 1.5rem}
+footer .footer-names{font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin:0.5rem 0}
+footer .footer-date{font-size:0.78rem;letter-spacing:3px;opacity:0.7;margin-top:0.3rem}
+footer .footer-brand{font-size:0.73rem;opacity:0.45;margin-top:2rem;letter-spacing:1px}
+
+
+/* ===== UTILITY CLASSES ===== */
+.cover-greeting{margin-top:1.5rem}
+.section-title{font-size:1.8rem;color:var(--rose-deep);margin-top:0.3rem}
+.section-description{font-size:0.86rem;color:var(--text-mid);max-width:500px;margin:0 auto;line-height:1.8}
+.location-text{font-size:0.78rem;letter-spacing:2px;color:var(--text-mid)}
+.icon-divider{font-size:2rem;margin-bottom:1rem}
+.divider-small{width:40px;margin:0.8rem auto}
+.gallery-caption{font-size:0.75rem;color:var(--text-mid);margin-top:1rem;letter-spacing:1px}
+.gallery-item-1{background:#e8a8bc;font-size:3.5rem}
+.gallery-item-2{background:#f0b8c8}
+.gallery-item-3{background:#e0a0b5}
+.gallery-item-4{background:#f7d0de}
+.gallery-item-5{background:#f4bece}
+.gallery-item-6{background:#e8b0c0}
+.gallery-item-7{background:#eca8b8}
+.gallery-item-8{background:#f0c0d0}
+.footer-ornament{color:rgba(255,255,255,0.3)}
+.footer-label{font-size:0.78rem;letter-spacing:3px;opacity:0.7}
+.footer-divider{height:1px;background:rgba(255,255,255,0.15);margin:2rem auto;width:60px}
+.footer-closing{font-size:0.84rem;opacity:0.7;max-width:400px;margin:0 auto;line-height:1.7}
+.footer-sign{font-family:'Playfair Display',serif;font-style:italic;margin-top:1rem;opacity:0.8;font-size:1rem}
+.footer-signature{font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin-top:0.3rem}
+.gift-box-heading{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--pink);margin-bottom:0.5rem}
+.gift-address{font-size:0.86rem;color:var(--text-mid);line-height:1.7}
+.gift-box-btn{margin-top:0.8rem}
+.gift-box-container{margin:2rem auto 0;background:#fff;border:1px solid var(--rose-mid);border-radius:16px;padding:1.5rem;max-width:400px}
+.divider-small-hero{width:80px;height:1px;background:var(--rose-mid);margin:0.5rem auto}
+.section-desc-m2{margin-bottom:2rem}
+
+@media(max-width:768px){
+  .couple-scroll-container{height:200vh}
+  .couple-scroll-card{height:clamp(320px,60vh,480px)}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item:first-child{grid-row:span 1;aspect-ratio:1}
+}
